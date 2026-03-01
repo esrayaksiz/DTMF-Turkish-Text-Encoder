@@ -3,17 +3,15 @@ import sounddevice as sd
 from scipy.io.wavfile import write, read
 import matplotlib.pyplot as plt
 
-# =========================
-# PARAMETERS
-# =========================
+
+# PARAMETRELER
 fs = 44100
 tone_duration = 0.04  # 40 ms — ödev sınırı içinde
 silence_duration = 0.01
-threshold = 0.05      # Minimum energy to consider a segment as a tone
+threshold = 0.05      # Bir segmenti ton olarak kabul etmek için gereken minimum enerji
 
-# =========================
 # TURKISH CHARACTER SET
-# =========================
+
 characters = [
     "A","B","C","Ç","D","E","F","G","Ğ","H",
     "I","İ","J","K","L","M","N","O","Ö","P",
@@ -36,9 +34,8 @@ for lf in low_freqs:
             reverse_mapping[(lf, hf)] = char
             index += 1
 
-# =========================
+
 # DSP CORE FUNCTIONS
-# =========================
 
 def generate_tone(f1, f2):
     t = np.linspace(0, tone_duration, int(fs*tone_duration), endpoint=False)
@@ -63,9 +60,8 @@ def goertzel(samples, target_freq):
     power = s_prev2**2 + s_prev**2 - coeff*s_prev*s_prev2
     return power
 
-# =========================
+
 # ENCODER & DECODER
-# =========================
 
 def encode_text(text, filename="encoded.wav"):
     text = text.upper()
@@ -125,9 +121,9 @@ def decode_audio(filename="encoded.wav"):
     print(f"\n[DECODED]: {decoded_text}")
     return decoded_text
 
-# =========================
+
 # VISUALIZATION DASHBOARD
-# =========================
+
 
 def plot_all_graphs(filename="encoded.wav"):
     try:
@@ -191,9 +187,9 @@ def plot_all_graphs(filename="encoded.wav"):
     plt.tight_layout()
     plt.show()
 
-# =========================
+
 # MAIN MENU
-# =========================
+
 
 def main():
     while True:
