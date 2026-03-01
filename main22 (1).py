@@ -4,17 +4,17 @@ from scipy.io.wavfile import write, read
 import matplotlib.pyplot as plt
 import os
 
-# =========================
+
 # PARAMETRELER
-# =========================
+
 fs = 44100
 tone_duration = 0.04  
 silence_duration = 0.01
 threshold = 0.05      
 
-# =========================
+
 # TÜRKÇE KARAKTER SETİ
-# =========================
+
 characters = [
     "A","B","C","Ç","D","E","F","G","Ğ","H",
     "I","İ","J","K","L","M","N","O","Ö","P",
@@ -36,9 +36,9 @@ for lf in low_freqs:
             reverse_mapping[(lf, hf)] = char
             index += 1
 
-# =========================
+
 # ÇEKİRDEK FONKSİYONLAR
-# =========================
+
 
 def generate_tone(f1, f2):
     t = np.linspace(0, tone_duration, int(fs*tone_duration), endpoint=False)
@@ -55,9 +55,9 @@ def goertzel(samples, target_freq):
         s_prev2, s_prev = s_prev, s
     return s_prev2**2 + s_prev**2 - coeff*s_prev*s_prev2
 
-# =========================
+
 # ENCODER & DECODER
-# =========================
+
 
 def encode_text(text, filename="encoded.wav"):
     text = text.upper()
@@ -127,9 +127,9 @@ def decode_audio():
 
     print("\n\n[ANALİZ TAMAMLANDI]")
 
-# =========================
+
 # VISUALIZATION DASHBOARD
-# =========================
+
 
 def plot_all_graphs():
     wav_files = [f for f in os.listdir('.') if f.endswith('.wav')]
@@ -188,9 +188,9 @@ def plot_all_graphs():
     plt.tight_layout()
     plt.show()
 
-# =========================
+
 # ANA MENÜ
-# =========================
+
 
 def main():
     while True:
